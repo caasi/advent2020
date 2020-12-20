@@ -1,18 +1,23 @@
 module Main where
 
+import System.Environment
 import Lib
-
-readInt :: String -> Int
-readInt = read
-
-readRange :: String -> Range
-readRange = read
-
-readPassword :: String -> Password
-readPassword = read
 
 main :: IO ()
 main = do
+  args <- getArgs
   str <- getContents
-  let ns = map readPassword (lines str)
-  print $ [day2a ns, day2b ns]
+  case head args of
+    "1a" ->
+      print $ day1a ns
+      where ns = map read (lines str)
+    "1b" ->
+      print $ day1b ns
+      where ns = map read (lines str)
+    "2a" ->
+      print $ day2a ns
+      where ns = map read (lines str)
+    "2b" ->
+      print $ day2b ns
+      where ns = map read (lines str)
+    _ -> print "program not found"
