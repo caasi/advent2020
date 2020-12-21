@@ -3,6 +3,7 @@ module Main where
 import System.Environment
 import Day1
 import Day2
+import Day3
 
 main :: IO ()
 main = do
@@ -21,4 +22,6 @@ main = do
     "2b" ->
       print $ day2b ns
       where ns = map read (lines str)
+    "3a" ->
+      print $ day3a str
     _ -> print "program not found"
