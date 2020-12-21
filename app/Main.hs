@@ -1,7 +1,8 @@
 module Main where
 
 import System.Environment
-import Lib
+import Day1
+import Day2
 
 main :: IO ()
 main = do
