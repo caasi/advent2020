@@ -1,12 +1,22 @@
 module Day3
     ( day3a
+    , day3b
     ) where
 
 day3a :: String -> Int
 day3a = countGeo 3 1 . read
 
+day3b :: String -> Int
+day3b str =
+  countGeo 1 1 geo *
+  countGeo 3 1 geo *
+  countGeo 5 1 geo *
+  countGeo 7 1 geo *
+  countGeo 1 2 geo
+  where geo = read str
+
 countGeo :: Int -> Int -> Geo -> Int
-countGeo dx dy = sum . map countNode . dropY dy . map head . dropX dx . map cycle . unwrap
+countGeo dx dy = sum . map (countNode . head) . dropX dx . map cycle . dropY dy . unwrap
 
 unwrap :: Geo -> [[MapNode]]
 unwrap (Geo xs) = map unwrapCol xs
@@ -23,9 +33,9 @@ dropY dy xss = go xss 0
   where
     go [] _ = []
     go (x:xs) c =
-      if c `mod` dy /= 0
-        then go xs (c + 1)
-        else x : go xs (c + 1)
+      if c `mod` dy == 0
+        then x : go xs (c + 1)
+        else go xs (c + 1)
 
 countNode :: MapNode -> Int
 countNode WithTree    = 1

@@ -24,4 +24,6 @@ main = do
       where ns = map read (lines str)
     "3a" ->
       print $ day3a str
+    "3b" ->
+      print $ day3b str
     _ -> print "program not found"
